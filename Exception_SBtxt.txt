@@ -1,0 +1,245 @@
+// You are using Java
+
+import java.util.Scanner;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        try
+        {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            System.out.println("The sum is " + (a+b));
+        }
+        catch (Exception e)
+        {
+            System.out.println("Invalid input. Please enter valid numbers.");
+        }
+    }
+}
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        try
+        {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            System.out.print("Your average grade is " + (a+b)/2.0 + " ");
+            
+            if ((a+b)/2.0 >= 60)
+            {
+                System.out.println("You Passed the exam.");
+            }
+            else
+            {
+                System.out.println("You Failed the exam.");
+            }
+            
+        }
+        catch (Exception e)
+        {
+            System.out.println("Invalid input. Please enter valid exam scores.");
+        }
+        
+    }
+}
+
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        try
+        {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int c = sc.nextInt();
+            
+            if (a <= 0 || b <= 0 || c <= 0)
+            {
+                throw new IllegalArgumentException("IllegalArgumentException: Side lengths must be positive.");
+            }
+            
+            if (a+b > c && a+c > b && b+c > a)
+            {
+                System.out.println("It\'s a valid triangle.");
+            }
+            else
+            {
+                System.out.println("It\'s not a valid triangle.");
+            }
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        int n = -1;
+        
+        try
+        {
+            n = sc.nextInt();
+            if (n < 0)
+            {
+                throw new IllegalArgumentException("Input number must be non-negative");
+            }
+        }
+        catch (IllegalArgumentException e)
+        {
+            System.out.println("Error: " + e.getMessage());
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error: Input must be a valid integer.");
+        }
+        finally
+        {
+            if (n < 0)
+            {
+                return;
+            }
+            int t = n;
+            int c = 0;
+            while (t != 0)
+            {
+                t/=10;
+                c++;
+            }
+            t = n;
+            int am = 0;
+            while (t != 0)
+            {
+                am += Math.pow(t%10, c);
+                t/=10;
+            }
+            System.out.print(n + " ");
+            System.out.println((n == am) ? "is Armstrong number." : "is not Armstrong number."); 
+        }
+        
+    }
+}
+
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+import java.lang.String;
+
+class DotException extends Exception
+{
+    DotException(String msg)
+    {
+        super(msg);
+    }
+}
+
+class AtTheRateException extends Exception
+{
+    AtTheRateException(String msg)
+    {
+        super(msg);
+    }
+}
+
+class DomainException extends Exception
+{
+    DomainException(String msg)
+    {
+        super(msg);
+    }
+}
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        int c = 0;
+        
+        try
+        {
+            String email = sc.nextLine();
+            String domain = email.substring(email.indexOf('.')+1);
+            if (email.startsWith("@") || email.endsWith("@"))
+            {
+                throw new DotException("Invalid Dot usage");
+            }
+            else if (email.startsWith(".") || email.endsWith("."))
+            {
+                throw new DotException("Invalid Dot usage");
+            }
+            else if (email.indexOf('@') != email.lastIndexOf('@'))
+            {
+                throw new AtTheRateException("Invalid @ usage");
+            }
+            else if (email.indexOf('.') != email.lastIndexOf('.'))
+            {
+                throw new DotException("Invalid Dot usage");
+            }
+            else if (email.indexOf('.') < email.indexOf('@'))
+            {
+                throw new DotException("Invalid Dot usage");
+            }
+            else if (!(domain.equals("com") || domain.equals("in") || domain.equals("net") || domain.equals("biz")))
+            {
+                throw new DomainException("Invalid Domain");
+            }
+        }
+        catch (DotException e)
+        {
+            System.out.println("DotException: " + e.getMessage());
+            c = 1;
+        }
+        catch (AtTheRateException e)
+        {
+            System.out.println("AtTheRateException: " + e.getMessage());
+            c = 1;
+        }
+        catch (DomainException e)
+        {
+            System.out.println("DomainException: " + e.getMessage());
+            c = 1;
+        }
+        finally
+        {
+            System.out.println((c == 1) ? "Invalid email address" : "Valid email address");
+        }
+    }
+}

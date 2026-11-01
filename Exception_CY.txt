@@ -1,0 +1,175 @@
+// You are using Java
+
+import java.util.Scanner;
+
+class InvalidUsernameException extends Exception
+{
+    InvalidUsernameException(String msg)
+    {
+        super(msg);
+    }
+}
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        try
+        {
+            String st = sc.nextLine();
+            if (st.length() < 5)
+            {
+                throw new InvalidUsernameException("Username must be at least 5 characters long");
+            }
+            else if (st.indexOf(' ') != -1)
+            {
+                throw new InvalidUsernameException("Username cannot contain spaces");
+            }
+            else
+            {
+                System.out.println("Username is valid: " + st);
+            }
+        }
+        catch (InvalidUsernameException e)
+        {
+            System.out.println("Invalid Username: " + e.getMessage());
+        }
+    }
+}
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+
+class calculatePermutations
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        int fact = 1;
+        try
+        {
+            int n = sc.nextInt();
+            if (n < 0)
+            {
+                throw new Exception("Negative value of N");
+            }
+            for (int i = 1; i < n+1; i++)
+            {
+                fact *= i;
+            }
+            System.out.println(fact);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+
+class GradeException extends Exception
+{
+    GradeException(String msg)
+    {
+        super(msg);
+    }
+}
+
+class Student
+{
+    String name;
+    int age;
+    int grade;
+    
+    Student(String n, int a, int g)
+    {
+        this.name = n;
+        this.age = a;
+        this.grade = g;
+    }
+    
+    void checkGrade() throws GradeException
+    {
+        if (grade < 40)
+        {
+            throw new GradeException("Grade is below 40");
+        }
+    }
+    
+    void display()
+    {
+        System.out.println("Name: " + name + "\nAge: " + age + "\nGrade: " + grade);
+    }
+}
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        try
+        {
+            Student st = new Student(sc.nextLine(), sc.nextInt(), sc.nextInt());
+            st.checkGrade();
+            st.display();
+        }
+        catch (GradeException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        try
+        {
+            int n = sc.nextInt();
+            System.out.println("Postfix increment: " + n++);
+            System.out.println("Prefix increment: " + ++n);
+            
+        }
+        catch (Exception e)
+        {
+            System.out.println("Invalid input! Please enter an integer.");
+        }
+    }
+}
+
+
+
+// You are using Java
+public static void main(String[] args)
+{
+    Scanner sc = new Scanner(System.in);
+
+    try
+    {
+        double r = sc.nextDouble();
+        System.out.printf("%.2f", 1.33*3.14*r*r*r);
+    }
+    catch (Exception e)
+    {
+        System.out.println("Error: Invalid input");
+    }
+}

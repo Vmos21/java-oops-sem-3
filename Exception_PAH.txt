@@ -1,0 +1,267 @@
+// You are using Java
+
+import java.util.Scanner;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        try
+        {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                arr[i] = sc.nextInt();
+            }
+            int id = sc.nextInt();
+            System.out.println("Element at index " + id + ": " + arr[id]);
+        }
+        catch (ArrayIndexOutOfBoundsException e)
+        {
+            System.out.println("Error: Array index out of bounds");
+        }
+    }
+}
+
+
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+
+class InputMismatchException extends Exception
+{
+    InputMismatchException(String msg)
+    {
+        super(msg);
+    }
+}
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        try
+        {
+            int n = sc.nextInt();
+            System.out.println("You entered: " + n);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error: Please enter a valid input");
+        }
+        finally
+        {
+            System.out.println("Scanner closed in the finally block");
+        }
+    }
+}
+
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+import java.lang.String;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        try
+        {
+            int n = sc.nextInt();
+            sc.nextLine();
+            String[] arr = new String[n];
+            for (int i = 0; i < n; i++)
+            {
+                arr[i] = sc.nextLine();
+            }
+            int t = sc.nextInt();
+            if (arr[t].equals("null"))
+            {
+                throw new NullPointerException("");
+            }
+            System.out.println("Student name length at index " + t + ": " + arr[t].length());
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("Error: No student name found at the given index");
+        }
+    }
+}
+
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        int a = -1, b = -1;
+        String op;
+        Scanner sc = new Scanner(System.in);
+        int c = 0;
+        
+        System.out.print("First number: ");
+        try
+        {
+            a = sc.nextInt();
+            System.out.println(a);
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("Error - Invalid integer");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error - Invalid integer");
+            sc.nextLine();
+        }
+        
+        System.out.print("Second number: ");
+        try
+        {
+            b = sc.nextInt();
+            if (b == 0)
+            {
+                throw new NumberFormatException("");
+            }
+            System.out.println(b);
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("Error - Invalid integer");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error - Invalid integer");
+            sc.nextLine();
+            c = 1;
+        }
+        
+        System.out.print("Operator: ");
+        try
+        {
+            if (c == 0){ sc.nextLine(); }
+            String st = sc.nextLine();
+            if (st.length() > 1){ op = st.substring(0, 1); }
+            else{ op = st; }
+            if (!(op.equals("+") || op.equals("-") || op.equals("*") || op.equals("/")))
+            {
+                throw new IllegalArgumentException("");
+            }
+            else if (op.equals("/") && b == 0)
+            {
+                throw new ArithmeticException("");
+            }
+            System.out.println(op);
+        }
+        catch (IllegalArgumentException e)
+        {
+            System.out.println("Error - Invalid operator");
+        }
+        catch (ArithmeticException e)
+        {
+            System.out.println("Error - Division by zero");
+        }
+    }
+}
+
+
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        int trainNum;
+        String date;
+        
+        System.out.print("Train Number: ");
+        try
+        {
+            trainNum = sc.nextInt();
+            if (Integer.toString(trainNum).length() != 5)
+            {
+                throw new Exception("");
+            }
+            System.out.println(trainNum);
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("Error - Invalid train number");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error - Invalid train number");
+        }
+        
+        sc.nextLine();
+        System.out.print("Journey Date: ");
+        try
+        {
+            date = sc.nextLine();
+            if (date.length() != 10)
+            {
+                throw new Exception("");
+            }
+            String[] arr = date.split("/");
+            int n = arr.length;
+            if (n != 3)
+            {
+                throw new Exception("");
+            }
+            int day = Integer.parseInt(arr[0]);
+            int month = Integer.parseInt(arr[1]);
+            int year = Integer.parseInt(arr[2]);
+            if (year < 0 || month < 0 || day < 0)
+            {
+                throw new Exception("");
+            }
+            else if ((year%4 == 0 || year%400 != 0) && month == 2 && day > 29)
+            {
+                throw new Exception("");
+            }
+            else  if (month == 2 && day > 28)
+            {
+                throw new Exception("");
+            }
+            else if (month < 8 && (month%2 != 0 && day > 31 || month%2 == 0 && day > 30))
+            {
+                throw new Exception("");
+            }
+            else if (month > 7 && (month%2 == 0 && day > 31 || month%2 != 0 && day > 30))
+            {
+                throw new Exception("");
+            }
+            System.out.println(date);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error - Invalid date format");
+        }
+        
+    }
+}

@@ -1,0 +1,199 @@
+// You are using Java
+
+import java.util.Scanner;
+
+interface Product
+{
+    void ProductDetails(Scanner sc);
+    void showBill();
+}
+
+class Customer implements Product
+{
+    int id;
+    String name;
+    int bill = 0;
+    
+    public void ProductDetails(Scanner sc)
+    {
+        this.id = sc.nextInt();
+        this.name = sc.next();
+        int n = sc.nextInt();
+        for (int i = 0; i < n; i++)
+        {
+            sc.nextLine();
+            sc.nextLine();
+            bill += sc.nextInt();
+        }
+    }
+    
+    public void showBill()
+    {
+        System.out.print("ID:" + id + "\nNAME:" + name + "\nBill:");
+        if (bill <= 10000)
+        {
+            bill += 0*bill;
+            System.out.print(bill);
+        }
+        else if (bill <= 30000)
+        {
+            bill += 0.05*bill;
+            System.out.print(bill);
+        }
+        else if (bill <= 50000)
+        {
+            bill += 0.07*bill;
+            System.out.print(bill);
+        }
+        else if (bill > 50000)
+        {
+            bill += 0.09*bill;
+            System.out.print(bill);
+        }
+        System.out.println();
+        
+    }
+}
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        
+        Customer[] carr = new Customer[n];
+        for(int i = 0; i < n; i++)
+        {
+            carr[i] = new Customer();
+            carr[i].ProductDetails(sc);
+            carr[i].showBill();
+        }
+    }
+}
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+import java.lang.String;
+
+interface PalindromeChecker
+{
+    boolean isPalindrome(String str);
+}
+
+class StringPalindromeChecker implements PalindromeChecker
+{
+    public boolean isPalindrome(String str)
+    {
+        char[] arr = str.toCharArray();
+        for (int i = 0, j = str.length()-1; i < j; i++, j--)
+        {
+            if (arr[i] != arr[j]){ return false;}
+        }
+        return true;
+    }
+}
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner input = new Scanner(System.in);
+        String str = input.nextLine();
+        System.out.println((new StringPalindromeChecker().isPalindrome(str)) ? "It's a palindrome!" : "It's not a palindrome.");
+    }
+}
+
+
+
+
+
+
+
+// You are using Java
+
+interface InterestCalculator
+{
+    double simpleInterest(double p, double r, int t);
+}
+
+class SimpleInterestCalculator implements InterestCalculator
+{
+    public double simpleInterest(double p, double r, int t)
+    {
+        return p*r*t/100;
+    }
+}
+
+
+
+
+// You are using Java
+
+interface CostCalculator
+{
+    void getEnergyDetails(Scanner sc);
+    void calculateAndDisplayCost();
+}
+
+class EnergyConsumptionTracker implements CostCalculator
+{
+    double rate;
+    int n;
+    double[] energyCost = new double[n];
+    
+    EnergyConsumptionTracker(double rate, int n)
+    {
+        this.rate = rate;
+        this.n = n;
+        this.energyCost = new double[n];
+    }
+    
+    
+    public void getEnergyDetails(Scanner sc)
+    {
+        for (int i = 0; i < energyCost.length; i++)
+        {
+            energyCost[i] = sc.nextDouble();
+        }
+    }
+    
+    public void calculateAndDisplayCost()
+    {
+        double total = 0;
+        System.out.println("Day-wise Energy Cost:");
+        for (int i = 0; i < n; i++)
+        {
+            total += rate*energyCost[i];
+            System.out.printf("Day %d: Rs. %.2f\n", i+1, rate*energyCost[i]);
+        }
+        System.out.printf("Total Energy Cost: Rs. %.2f", total);
+    }
+}
+
+
+
+
+// You are using Java
+
+import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        LocalDate date1 = LocalDate.parse(sc.nextLine());
+        LocalDate date2 = LocalDate.parse(sc.nextLine());
+        
+        long days = ChronoUnit.DAYS.between(date1, date2);
+        System.out.println(Math.abs(days) + " days");
+    }
+}

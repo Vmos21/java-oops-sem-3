@@ -1,0 +1,159 @@
+// You are using Java
+
+import java.util.Scanner;
+import java.lang.String;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        String st = sc.nextLine();
+        char ch = sc.nextLine().charAt(0);
+        char[] arr = st.toCharArray();
+        
+        int c = 0;
+        for (int i = 0; i < arr.length; i++)
+        {
+            if (ch == arr[i])
+            {
+                c++;
+            }
+        }
+        
+        System.out.println("The character \'" + ch + "\' " + "occurs " + c + " times.");
+    }
+}
+
+
+// You are using Java
+
+class MatrixAnalyzer
+{
+    void diagonalsMinMax(int[][] arr)
+    {
+        int n = arr[0].length;
+        int minMain = arr[0][0], maxMain = arr[0][0], minSec = arr[0][n-1], maxSec = arr[0][n-1];
+        
+        for (int i = 0; i < arr.length; i++)
+        {
+            if (arr[i][i] < minMain){ minMain = arr[i][i];}
+            if (arr[i][i] > maxMain){ maxMain = arr[i][i];}
+            
+            if (arr[i][n-i-1] < minSec){ minSec = arr[i][n-i-1];}
+            if (arr[i][n-i-1] > maxSec){ maxSec = arr[i][n-i-1];}
+        }
+        
+        System.out.println("Smallest Element - 1: " + minMain + "\nLargest Element - 1: " + maxMain + "\nSmallest Element - 2: " + minSec + "\nLargest Element - 2: " + maxSec);
+    }
+}
+
+
+// You are using Java
+class FullTimeEmployee
+{
+    String name;
+    int salary;
+    
+    FullTimeEmployee(String name, int sal)
+    {
+        this.name = name;
+        this.salary = sal;
+    }
+    
+    void displayDetails()
+    {
+        System.out.println("Full-Time Employee Details:\nName: " + name + "\nMonthly Salary: $" + salary + "\nAnnual Salary: $" + salary*12);
+    }
+    
+}
+
+class PartTimeEmployee
+{
+    String name;
+    int hourRate;
+    int hoursWorked;
+    
+    PartTimeEmployee(String name, int hourRate, int hoursWorked)
+    {
+        this.name = name;
+        this.hourRate = hourRate;
+        this.hoursWorked = hoursWorked;
+    }
+    
+    void displayDetails()
+    {
+        System.out.println("Part-Time Employee Details:\nName: " + name + "\nHourly Rate: $" + hourRate + "\nHours Worked: " + hoursWorked + "hours\nMonthly Salary: $" + hourRate*hoursWorked);
+    }
+}
+
+
+
+
+
+
+// You are using Java
+
+interface Inventory
+{
+    void addProduct(String name, double price, int qty);
+    double calculateTotalValue();
+}
+
+class SimpleInventory implements Inventory
+{
+    int n;
+    double total = 0;
+    
+    SimpleInventory(int n)
+    {
+        this.n = n;
+    }
+    
+    public void addProduct(String name, double price, int qty)
+    {
+        total += price*qty;
+        System.out.println("Product added to inventory.");
+    }
+    
+    public double calculateTotalValue()
+    {
+        return total;
+    }
+}
+
+
+
+// You are using Java
+
+interface ExpenseRecorder
+{
+    void recordExpense(double expense);
+}
+
+interface BudgetCalculator
+{
+    double calculateRemainingBudget();
+}
+
+class ExpenseTracker implements ExpenseRecorder, BudgetCalculator
+{
+    double tot = 0;
+    double budget;
+    
+    ExpenseTracker(double budget)
+    {
+        this.budget = budget;
+    }
+    
+    public void recordExpense(double expense)
+    {
+        tot += expense;
+    }
+    
+    public double calculateRemainingBudget()
+    {
+        return budget-tot;
+    }
+}
+
