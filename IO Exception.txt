@@ -1,0 +1,110 @@
+import java.io.*;
+import java.util.Scanner;
+
+class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+        try
+        {
+            FileWriter file = new FileWriter("farm.txt");
+        
+            for (int i = 0; i < n; i++)
+            {
+                arr[i] = sc.nextInt();
+                if (arr[i]%5 == 0)
+                {
+                    file.write("Plant " + arr[i] + " gram seed\n");
+                }
+                else
+                {
+                    file.write("Change " + arr[i] + " gram seed\n");
+                }
+            }
+
+            file.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println("IO Exception");
+        }
+
+        try
+        {
+            BufferedReader file2 = new BufferedReader(new FileReader("farm.txt"));
+            String line;
+    
+            while ((line = file2.readLine()) != null)
+            {
+                System.out.println(line);
+            }
+    
+            file2.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println("IO Exception");
+        }
+    }
+}
+
+
+
+// Other problem
+class Product implements Serializable
+{
+    String name;
+    double price;
+    int quantity;
+
+    Product(String name, double price, int quantity)
+    {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String toString()
+    {
+        return String.format("Product{name='%s', price=%.2f, quantity=%d}", name, price, quantity);
+    }
+}
+
+class InventoryManager
+{
+    void serialize(Product[] p, String file)
+    {
+        try
+        {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
+            out.writeObject(p);
+            //System.out.println("Serialization complete");
+            out.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println("IO Error");
+        }
+    }
+    Product[] deserialize(String file)
+    {
+        try
+        {
+            ObjectInputStream inn = new ObjectInputStream(new FileInputStream(file));
+            Product[] p = (Product[]) inn.readObject();
+            //System.out.println("Deserialization complete");
+            inn.close();
+            return p;
+        }
+        catch (Exception e)
+        {
+            System.out.println("IO Error");
+        }
+        return new Product[0];
+    }
+}
