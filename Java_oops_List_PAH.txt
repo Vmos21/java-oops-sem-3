@@ -1,0 +1,218 @@
+Java_oops_List_PAH
+
+//1
+
+class Student implements Comparable<Student> {
+    int id;
+    String name;
+    int score;
+
+    public Student(int id, String name, int score) {
+        this.id = id;
+        this.name = name;
+        this.score = score;
+    }
+
+    @Override
+    public int compareTo(Student other) {
+        int scoreCmp = Integer.compare(other.score, this.score);
+        if (scoreCmp != 0) {
+            return scoreCmp;
+        }
+        int nameCmp = this.name.compareTo(other.name);
+        if (nameCmp != 0) {
+            return nameCmp;
+        }
+        return Integer.compare(this.id, other.id);
+    }
+}
+
+class UniversityAdmissionProcessor {
+    public void processStudents(TreeSet<Student> studentSet) {
+        if (studentSet.isEmpty()) {
+            return;
+        }
+        for (Student s : studentSet) {
+            System.out.println(s.id + " " + s.name + " " + s.score);
+        }
+        int diff = studentSet.first().score - studentSet.last().score;
+        System.out.print(diff);
+    }
+}
+
+//2
+
+class Student implements Comparable<Student> {
+    int id;
+    String name;
+    double gpa;
+
+    public Student(int id, String name, double gpa) {
+        this.id = id;
+        this.name = name;
+        this.gpa = gpa;
+    }
+
+    @Override
+    public int compareTo(Student other) {
+        int gpaCmp = Double.compare(other.gpa, this.gpa);
+        if (gpaCmp != 0) {
+            return gpaCmp;
+        }
+        return Integer.compare(this.id, other.id);
+    }
+}
+
+class UniversityRecords {
+    private TreeSet<Student> studentSet;
+
+    public UniversityRecords(TreeSet<Student> studentSet) {
+        this.studentSet = studentSet;
+    }
+
+    public void displayRecords() {
+        for (Student s : studentSet) {
+            System.out.printf("%d %s %.2f%n", s.id, s.name, s.gpa);
+        }
+    }
+
+    public double getHighestGPA() {
+        return studentSet.first().gpa;
+    }
+
+    public double getLowestGPA() {
+        return studentSet.last().gpa;
+    }
+}
+
+//3
+
+class Playlist {
+    private LinkedList<String> songs;
+    private int currentIndex;
+
+    public Playlist() {
+        songs = new LinkedList<>();
+        currentIndex = 0;
+    }
+
+    public void addSong(String song) {
+        songs.add(song);
+    }
+
+    public void removeSong(String song) {
+        int idx = songs.indexOf(song);
+        if (idx != -1) {
+            songs.remove(idx);
+            if (songs.isEmpty()) {
+                currentIndex = 0;
+            } else if (idx < currentIndex) {
+                currentIndex--;
+            } else if (currentIndex >= songs.size()) {
+                currentIndex = 0;
+            }
+        }
+    }
+
+    public void showPlaylist() {
+        if (songs.isEmpty()) {
+            System.out.println("EMPTY");
+        } else {
+            System.out.println(String.join(" ", songs));
+        }
+    }
+
+    public void nextSong() {
+        if (songs.isEmpty()) {
+            System.out.println("EMPTY");
+        } else {
+            currentIndex = (currentIndex + 1) % songs.size();
+            System.out.println(songs.get(currentIndex));
+        }
+    }
+}
+
+//4
+
+class TaskManager {
+    private LinkedList<String> tasks;
+
+    public TaskManager() {
+        tasks = new LinkedList<>();
+    }
+
+    public void processCommand(String command) {
+        if (command.startsWith("ADD ")) {
+            String taskName = command.substring(4);
+            tasks.addLast(taskName);
+        } else if (command.equals("REMOVE")) {
+            if (!tasks.isEmpty()) {
+                tasks.removeFirst();
+            }
+        } else if (command.equals("SHOW")) {
+            if (tasks.isEmpty()) {
+                System.out.println("EMPTY");
+            } else {
+                System.out.println(String.join(" ", tasks));
+            }
+        }
+    }
+}
+
+//5
+
+class StringListOperations {
+    public static void processCommands(String input) {
+        ArrayList<String> list = new ArrayList<>();
+        String[] tokens = input.trim().split("\\s+");
+        StringBuilder output = new StringBuilder();
+        int i = 0;
+
+        while (i < tokens.length) {
+            if (tokens[i].isEmpty()) {
+                i++;
+                continue;
+            }
+            int choice = Integer.parseInt(tokens[i]);
+            i++;
+
+            if (choice == 1) {
+                if (i < tokens.length) {
+                    String item = tokens[i++];
+                    list.add(item);
+                    output.append(item).append(" has been added to the list.\n");
+                }
+            } else if (choice == 2) {
+                if (i < tokens.length) {
+                    String item = tokens[i++];
+                    if (list.remove(item)) {
+                        output.append(item).append(" has been removed from the list.\n");
+                    }
+                }
+            } else if (choice == 3) {
+                if (list.isEmpty()) {
+                    output.append("The list is empty.\n");
+                } else {
+                    output.append("Items in the list:\n");
+                    for (String item : list) {
+                        output.append(item).append("\n");
+                    }
+                }
+            } else if (choice == 4) {
+                if (i < tokens.length) {
+                    String item = tokens[i++];
+                    if (list.contains(item)) {
+                        output.append(item).append(" is found in the list.\n");
+                    } else {
+                        output.append(item).append(" not found in the list.\n");
+                    }
+                }
+            }
+        }
+
+        if (output.length() > 0 && output.charAt(output.length() - 1) == '\n') {
+            output.deleteCharAt(output.length() - 1);
+        }
+        System.out.print(output.toString());
+    }
+}

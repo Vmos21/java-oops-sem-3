@@ -1,0 +1,115 @@
+Java_oops_List_CY
+
+//1
+import java.util.*;
+
+class Main
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        ArrayList<String> list = new ArrayList<>();
+        
+        for (int i = 0; i < n; i++) list.add(sc.nextLine());
+
+        for (String name:list)
+        {
+            int c = 0;
+            for (char ch: name.toLowerCase().toCharArray()){if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') c++;}
+            if (c <= 2) System.out.println(name);
+        }
+        sc.close();
+    }
+}
+
+class TransactionMonitor
+{
+    int c;
+    ArrayList<Integer> list;
+    TransactionMonitor(int c)
+    {
+        this.c = c;
+        list = new ArrayList<>();
+    }
+    void process(int amt)
+    {
+        list.remove(Integer.valueOf(amt));
+        list.add(amt);
+        if (list.size() > c){list.remove(list.get(0));}
+    }
+    ArrayList<Integer> getRetained()
+    {
+        return list;
+    }
+}
+
+
+// 3
+
+class MathUtility {
+    private List<Double> numbers;
+
+    public MathUtility()
+    {
+        numbers = new ArrayList<>();
+    }
+
+    public void readNumbers(Scanner sc, int n) {
+        for (int i = 0; i < n; i++) { numbers.add(sc.nextDouble()); }
+    }
+
+    public double calculateGeometricMean() {
+        double pr = 1;
+        for (double i:numbers)
+        {
+            pr*=i;
+        }
+        return Math.pow(pr, 1.0/numbers.size());
+    }
+}
+
+//4
+
+class AverageCalculator {
+    private List<Double> numbers;
+
+    public AverageCalculator()
+    {
+        this.numbers = new ArrayList<>();
+    }
+
+    public void addNumber(double num)
+    {
+        numbers.add(num);
+    }
+
+    public double calculateAverage() {
+        double sum = 0;
+        for (double i:numbers){ sum+= i; }
+        return sum/numbers.size();
+    }
+}
+
+//5
+
+class NumberProcessor
+{
+    ArrayList<Integer> list;
+    NumberProcessor(ArrayList<Integer> list) { this.list = list; }
+    void processNumbers()
+    {
+        ArrayList<Integer> opArr = new ArrayList<>();
+        for (int i = 0; i < list.size()-1; i++)
+        {
+            if (list.get(i) > list.get(i+1))
+            {
+                list.remove(i+1);
+                i--;
+            }
+        }
+        System.out.println(list);
+    }
+}

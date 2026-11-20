@@ -1,0 +1,100 @@
+List Skill Builder
+
+//1
+class MergeUtility
+{
+    static LinkedList<Integer> readList(Scanner sc, int n)
+    {
+        LinkedList<Integer> ll = new LinkedList<>();
+        for (int i = 0; i < n; i++) {ll.add(sc.nextInt());}
+        return ll;
+    }
+
+    static LinkedList<Integer> mergeLists(LinkedList<Integer> l1, LinkedList<Integer> l2)
+    {
+        l1.addAll(l2);
+        Collections.sort(l1);
+        return l1;
+    }
+
+    static void printList(LinkedList<Integer> l)
+    {
+        for (int val : l)
+        {
+            System.out.print(val);
+        }
+        System.out.println();
+    }
+}
+//2
+class GuestListManager {
+    public static void manageGuestList(int n, Scanner sc)
+    {
+        ArrayList<String> arr = new ArrayList<>();
+        for (int i = 0; i < n; i++) { arr.add(sc.nextLine()); }
+
+        for (String st: arr){ System.out.println(st); }
+    }
+}
+//3
+class ItemType
+{
+    String name;
+    double dep;
+    double cpd;
+
+    ItemType(String n, double d, double c)
+    {
+        this.name = n;
+        this.dep = d;
+        this.cpd = c;
+    }
+}
+
+class InventoryManager
+{
+    static void processInventory(Scanner sc)
+    {
+        int n = sc.nextInt();
+        ArrayList<ItemType> arr = new ArrayList<>();
+        for (int i = 0; i < n; i++)
+        {
+            sc.nextLine();
+            arr.add(new ItemType(sc.nextLine(), sc.nextDouble(), sc.nextDouble()));
+        }
+        System.out.printf("%-20s%-20s%-20s\n", "Name", "Deposit", "Cost Per Day");
+        for (ItemType item: arr)
+        {
+            System.out.printf("%-20s%-20s%-20s\n", item.name, item.dep, item.cpd);
+        }
+    }
+}
+//4
+class Main
+{
+static void processNames()
+{
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    ArrayList<String> arr = new ArrayList<>();
+    sc.nextLine();
+    for (int i = 0; i < n; i++){ arr.add(sc.nextLine()); }
+    String target = sc.nextLine();
+    int c = 0;
+    for (String st:arr){if(st.equals(target)){c++;}}
+    System.out.println(c);
+}
+
+//5
+class NameManager
+{
+    ArrayList<String> arr;
+    NameManager() { this.arr = new ArrayList<>(); }
+
+    void addName(String name) {arr.add(name);}
+    void printNameAtIndex(int i)
+    {
+        if (i < arr.size()){System.out.println("Element at index " + i + ": " + arr.get(i));}
+        else{System.out.println("Invalid Index");}
+    }
+}

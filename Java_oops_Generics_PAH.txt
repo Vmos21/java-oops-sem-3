@@ -1,0 +1,172 @@
+Java_oops_Generics_PAH
+
+//1
+
+import java.util.Scanner;
+import java.util.function.ToIntFunction;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        if (!sc.hasNextLine()) {
+            sc.close();
+            return;
+        }
+        String sentence = sc.nextLine().trim();
+        sc.close();
+
+        ToIntFunction<String> countWords = str -> str.isEmpty() ? 0 : str.split("\\s+").length;
+
+        System.out.print(countWords.applyAsInt(sentence));
+    }
+}
+
+//2
+
+import java.util.Scanner;
+import java.util.function.ToIntFunction;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        if (!sc.hasNextInt()) {
+            sc.close();
+            return;
+        }
+        int n = sc.nextInt();
+
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+        sc.close();
+
+        ToIntFunction<int[]> findMax = arr -> {
+            int max = arr[0];
+            for (int val : arr) {
+                if (val > max) {
+                    max = val;
+                }
+            }
+            return max;
+        };
+
+        ToIntFunction<int[]> findMin = arr -> {
+            int min = arr[0];
+            for (int val : arr) {
+                if (val < min) {
+                    min = val;
+                }
+            }
+            return min;
+        };
+
+        System.out.println("Maximum value: " + findMax.applyAsInt(nums));
+        System.out.print("Minimum value: " + findMin.applyAsInt(nums));
+    }
+}
+
+//3
+
+import java.util.Scanner;
+import java.util.function.ToIntFunction;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        if (!sc.hasNextInt()) {
+            sc.close();
+            return;
+        }
+        int n = sc.nextInt();
+
+        String[] words = new String[n];
+        for (int i = 0; i < n; i++) {
+            words[i] = sc.next();
+        }
+        sc.close();
+
+        ToIntFunction<String[]> longestLength = arr -> {
+            int max = arr[0].length();
+            for (String s : arr) {
+                if (s.length() > max) {
+                    max = s.length();
+                }
+            }
+            return max;
+        };
+
+        ToIntFunction<String[]> shortestLength = arr -> {
+            int min = arr[0].length();
+            for (String s : arr) {
+                if (s.length() < min) {
+                    min = s.length();
+                }
+            }
+            return min;
+        };
+
+        System.out.println(longestLength.applyAsInt(words));
+        System.out.print(shortestLength.applyAsInt(words));
+    }
+}
+
+//4
+
+import java.util.Scanner;
+import java.util.function.Predicate;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        if (!sc.hasNext()) {
+            sc.close();
+            return;
+        }
+        String word = sc.next();
+        sc.close();
+
+        Predicate<String> isPalindrome = s -> {
+            String reversed = new StringBuilder(s).reverse().toString();
+            return s.equals(reversed);
+        };
+
+        if (isPalindrome.test(word)) {
+            System.out.print(word + " is palindrome");
+        } else {
+            System.out.print(word + " is not palindrome");
+        }
+    }
+}
+
+//5
+
+import java.util.Scanner;
+import java.util.function.Function;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        if (!sc.hasNextInt()) {
+            sc.close();
+            return;
+        }
+        int n = sc.nextInt();
+
+        double[] readings = new double[n];
+        for (int i = 0; i < n; i++) {
+            readings[i] = sc.nextDouble();
+        }
+        sc.close();
+
+        Function<double[], Double> calculateAverage = arr -> {
+            double sum = 0.0;
+            for (double val : arr) {
+                sum += val;
+            }
+            return sum / arr.length;
+        };
+
+        System.out.printf("%.2f", calculateAverage.apply(readings));
+    }
+}

@@ -1,0 +1,179 @@
+Java_oops_Hash_SB
+
+//1
+
+//Type your code here
+class GradeAnalyzer {
+    public void analyzeStudentGrades(List<String> records) {
+        TreeMap<String, Integer> highestScores = new TreeMap<>();
+
+        for (String record : records) {
+            String[] parts = record.trim().split("\\s+");
+            if (parts.length == 2) {
+                String name = parts[0];
+                int score = Integer.parseInt(parts[1]);
+                if (!highestScores.containsKey(name) || score > highestScores.get(name)) {
+                    highestScores.put(name, score);
+                }
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Student Highest Scores:");
+        for (Map.Entry<String, Integer> entry : highestScores.entrySet()) {
+            sb.append("\n").append(entry.getKey()).append(": ").append(entry.getValue());
+        }
+        System.out.print(sb.toString());
+    }
+}
+
+//2
+
+class FirstNonRepeatingChar {
+    public static char findFirstNonRepeating(String str) {
+        HashMap<Character, Integer> freq = new HashMap<>();
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            freq.put(ch, freq.getOrDefault(ch, 0) + 1);
+        }
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (freq.get(ch) == 1) {
+                return ch;
+            }
+        }
+
+        return '0';
+    }
+}
+
+//3
+
+class Solution {
+    public static void checkSubset(TreeSet<Integer> setA, TreeSet<Integer> setB, int totalElements, long sum) {
+        if (setA.containsAll(setB)) {
+            StringBuilder sb = new StringBuilder("YES");
+            for (int num : setB) {
+                sb.append(" ").append(num);
+            }
+            System.out.print(sb.toString());
+        } else {
+            double avg = (double) sum / totalElements;
+            System.out.printf("NO %.2f", avg);
+        }
+    }
+}
+
+//4
+
+class Vehicle {
+    String regNumber;
+    String ownerName;
+    String vehicleType;
+
+    public Vehicle(String regNumber, String ownerName, String vehicleType) {
+        this.regNumber = regNumber;
+        this.ownerName = ownerName;
+        this.vehicleType = vehicleType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return Objects.equals(regNumber, vehicle.regNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(regNumber);
+    }
+
+    @Override
+    public String toString() {
+        return regNumber + " " + ownerName + " " + vehicleType;
+    }
+}
+
+class VehicleDatabase {
+    private HashSet<Vehicle> vehicles;
+
+    public VehicleDatabase() {
+        vehicles = new LinkedHashSet<>();
+    }
+
+    public void addVehicle(String regNumber, String ownerName, String vehicleType) {
+        vehicles.add(new Vehicle(regNumber, ownerName, vehicleType));
+    }
+
+    public void displayVehicles() {
+        StringBuilder sb = new StringBuilder();
+        for (Vehicle v : vehicles) {
+            if (sb.length() > 0) {
+                sb.append("\n");
+            }
+            sb.append(v.toString());
+        }
+        System.out.print(sb.toString());
+    }
+}
+
+//5
+
+import java.util.*;
+
+class Student implements Comparable<Student> {
+    int id;
+    String name;
+    double gpa;
+
+    Student(int id, String name, double gpa) {
+        this.id = id;
+        this.name = name;
+        this.gpa = gpa;
+    }
+
+    @Override
+    public int compareTo(Student other) {
+        int gpaCmp = Double.compare(this.gpa, other.gpa);
+        if (gpaCmp != 0) {
+            return gpaCmp;
+        }
+        int nameCmp = this.name.compareTo(other.name);
+        if (nameCmp != 0) {
+            return nameCmp;
+        }
+        return Integer.compare(this.id, other.id);
+    }
+}
+
+class Main {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        if (!sc.hasNextInt()) {
+            sc.close();
+            return;
+        }
+        int n = sc.nextInt();
+
+        TreeSet<Student> students = new TreeSet<>();
+        for (int i = 0; i < n; i++) {
+            int id = sc.nextInt();
+            String name = sc.next();
+            double gpa = sc.nextDouble();
+            students.add(new Student(id, name, gpa));
+        }
+        sc.close();
+
+        StringBuilder sb = new StringBuilder();
+        for (Student s : students) {
+            if (sb.length() > 0) {
+                sb.append("\n");
+            }
+            sb.append(String.format("%d %s %.2f", s.id, s.name, s.gpa));
+        }
+        System.out.print(sb.toString());
+    }
+}
